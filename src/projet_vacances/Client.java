@@ -3,7 +3,7 @@ package projet_vacances;
 
 /**
  *
- * @author AhmedAmine
+ * @author AhmedAmineChakroun
  */
 public class Client {
     private int CIN; 
