@@ -6,17 +6,21 @@ import java.util.Scanner;
 
 /**
  *
- * @author ExNihilo
+ * @author AhmedAmine
  */
 public class Projet_Vacances {
    static Parc Vehicules = new Parc();
    static EnsembleLocations reg = new EnsembleLocations();
+   static Scanner re1 = new Scanner(System.in);
+   static Scanner re2 = new Scanner(System.in);
+   static Scanner re3 = new Scanner(System.in);
+   static Scanner reader = new Scanner(System.in); 
 
    public static void RetourMenuPrincipal(){ //au debut j'ai ecris ces lignes de codes dans toutes les fonction,
                                              //puis ça m'a frappé, pourquoi ne pas faire une fonction que j'appellerais chaque fois que
                                              //j'en aurais besoin si je ne peut pas ou je ne veux pas appeler directement MenuDemarrage()
                                              //avec l'exception InputMismatchException quand on tape quelque chose d'autre q'un integer
-    try{Scanner reader = new Scanner(System.in);
+    try{//Scanner reader = new Scanner(System.in);
     int n = reader.nextInt(); 
         switch (n) {
             case 1:
@@ -41,7 +45,7 @@ public static void MenuDemarrage(){
 "                                                                                                             ");
        
 
-    Scanner reader = new Scanner(System.in);  // pour prendre le input
+  //  Scanner reader = new Scanner(System.in);  // pour prendre le input
 
 
 
@@ -65,7 +69,7 @@ public static void MenuDemarrage(){
 
 public static void MenuGestParc(){
 
-    Scanner reader = new Scanner(System.in);  // pour prendre le input
+   // Scanner reader = new Scanner(System.in);  // pour prendre le input
 
     System.out.println("   _____           _   _                   _         _____               \n" +
 "  / ____|         | | (_)                 | |       |  __ \\              \n" +
@@ -108,7 +112,7 @@ public static void MenuGestParc(){
 }
 
 public static void MenuGestLoc(){
-Scanner reader = new Scanner(System.in);  // pour prendre le input
+
 
     System.out.println("   _____           _   _                   _             _                     _   _                 \n" +
 "  / ____|         | | (_)                 | |           | |                   | | (_)                \n" +
@@ -126,7 +130,7 @@ Scanner reader = new Scanner(System.in);  // pour prendre le input
             + "4 : Consultation des véhicules loués par un client\n"
             + "0 : retour vers le menu demarrage\n");
 
-    int n = reader.nextInt(); // Prendre le choix}
+    int n = reader.nextInt(); 
 
      switch (n) {
          
@@ -152,15 +156,11 @@ Scanner reader = new Scanner(System.in);  // pour prendre le input
 
 }  
 
-//Gestion du par de l'agence
+//Gestion du parc de l'agence
 
 public static void NouvAcqui(){
     System.out.println("Nouvelle Acquisition - Ajout d’un véhicule");
-    
-    Scanner re1 = new Scanner(System.in);
-    Scanner re2 = new Scanner(System.in);
-    Scanner re3 = new Scanner(System.in);
-    
+
     System.out.println("Veuillez saisir la matricule de votre voiture");
     int matr= re1.nextInt();
     System.out.println("Veuillez saisir la marque de votre voiture");
@@ -176,7 +176,8 @@ public static void NouvAcqui(){
     Vehicules.AjouterV(A);
     
     }catch(ArrayIndexOutOfBoundsException e){
-        System.out.println("Veuilez saisir un etat normal");
+        System.out.println("Veuilez saisir un etat normal la prochaine fois");
+        NouvAcqui();
         
     } 
  MenuDemarrage();
@@ -186,8 +187,8 @@ public static void NouvAcqui(){
 public static void ModifEtatVehic(){
     System.out.println("Modification de l’état d’un véhicule\n\n"
         + "Veuillez entrer un Numéro d’immatriculation ");
-    Scanner re1 = new Scanner(System.in);
-    Scanner re2 = new Scanner(System.in);
+    //Scanner re1 = new Scanner(System.in);
+    //Scanner re2 = new Scanner(System.in);
     int matr = re1.nextInt();
     System.out.println("Veuillez entrer:\n0 : pour disponible\n"
             + "1 : pour loué\n"
@@ -202,7 +203,7 @@ public static void SuppVehic(){
     System.out.println("Suppression d’un véhicule\n\n");
     System.out.println("Veuillez entrer le Numéro d’immatriculation "
             + "de la voiture que vous voulez supprimer !");
-        Scanner re1 = new Scanner(System.in);
+     //   Scanner re1 = new Scanner(System.in);
         int matr = re1.nextInt();
         Vehicules.SuppressionMat(matr);
         MenuDemarrage();
@@ -234,16 +235,18 @@ RetourMenuPrincipal();
 //Gestion des Location
 
 public static void NouvLoc(){
-System.out.println("Nouvelle location (Ajout d’une location) ");}
+System.out.println("Nouvelle location - Ajout d’une location\n\n ");
+
+}
 
 public static void FinLoc(){
-System.out.println("Fin de location (Suppression) ");}
+System.out.println("Fin de location - Suppression\n\n ");}
 
 public static void ConsVehicLoueAll(){
-System.out.println("Consultation des véhicules actuellement loués ");}
+System.out.println("Consultation des véhicules actuellement loués\n\n ");}
 
 public static void ConsVehicLoueClient(){
-System.out.println("Consultation des véhicules loués par un client ");}
+System.out.println("Consultation des véhicules loués par un client\n\n ");}
 
 
 
@@ -271,6 +274,10 @@ System.out.println("Consultation des véhicules loués par un client ");}
         Vehicules.AjouterV(B);
         Vehicules.AjouterV(C);
         Vehicules.AjouterV(D);
+        Vehicules.AjouterV(E);
+        Vehicules.AjouterV(F);
+        Vehicules.AjouterV(G);
+        Vehicules.AjouterV(H);
         
 
         

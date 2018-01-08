@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author ExNihilo
+ * @author AhmedAmine
  */
 public class EnsembleLocations {
     private HashSet<Location> Ens;
