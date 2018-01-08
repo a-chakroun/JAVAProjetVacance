@@ -15,7 +15,7 @@ public class EnsembleLocations {
         Ens = new HashSet<Location>();
            }
        
-    public void AjouterLocation(Location loc) {
+    public boolean AjouterLocation(Location loc) {
        
         if((loc.getMontAv()>0)&&(loc.getV().getEtat()=="disponible")){
                 
@@ -25,10 +25,14 @@ public class EnsembleLocations {
         if (d==true){ //verification de l'ajout de de la location
         System.out.println("Location Ajouté au registre");
         loc.getV().setEtat(1);
+        return true;
         }
         
-    }else System.out.println("Votre Location ne s'est pas ajouté au registre"); }
-    
+    }else {
+            System.out.println("Votre Location ne s'est pas ajouté au registre");
+             }
+        return false;
+    }
     
     public void DeleteLocation (int cin,int matr ){
         
@@ -57,4 +61,6 @@ public class EnsembleLocations {
             }
         }
     }
+    
+
 }

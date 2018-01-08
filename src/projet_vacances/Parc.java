@@ -46,7 +46,28 @@ public class Parc {
                 int maaat=Vehicules.indexOf(V);
                 Vehicules.set(maaat, V);
             }
-        }}}
-    
+        }}
+
+//   public Vehicule SearchCar(int matr) {
+//      
+//     for(Vehicule V :Vehicules){
+//            if(V.getMatricule()==matr){ return V;}
+//            else {System.out.println("La voiture n'est pas trouvé");
+//            return null;}}
 
 
+
+
+
+      public Vehicule SearchCar(int mat){
+          Vehicule V=null;
+        for(Iterator<Vehicule> iterator = Vehicules.iterator();
+                iterator.hasNext(); ) {
+            
+            if(iterator.next().getMatricule() == mat-1)
+                V =iterator.next();
+            }
+       return V;
+        
+    }
+}

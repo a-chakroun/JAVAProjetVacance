@@ -2,6 +2,7 @@
 package projet_vacances;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -21,7 +22,8 @@ public class Projet_Vacances {
                                              //j'en aurais besoin si je ne peut pas ou je ne veux pas appeler directement MenuDemarrage()
                                              //avec l'exception InputMismatchException quand on tape quelque chose d'autre q'un integer
     try{//Scanner reader = new Scanner(System.in);
-    int n = reader.nextInt(); 
+    System.out.println("\n\nTaper n'importe quel bouton puis entrer");
+        int n = reader.nextInt(); 
         switch (n) {
             case 1:
                 MenuDemarrage();
@@ -34,7 +36,17 @@ public class Projet_Vacances {
 System.out.println("S'il vout plais veuillez taper un chiffre.");
 MenuDemarrage();}}
    
-public static void MenuDemarrage(){     
+   
+public static void MenuDemarrage(){  
+    
+    
+    System.out.println(
+"      _                      ______________                _\n" +
+" ____//]_________       ____//__]| karhba |         ______//________\n" +
+"(o _ |  -|  _  o|      (o _ |   -|  _  _  |        /o _   |  -| _   \\\n" +
+" `(_)------(_)--'       `(_)-----'-(_)(_)-'        `-(_)-------(_)---'");
+    
+    
        System.out.println(" _                         _    _                     _         _   _         _  _                           \n" +
 "| |                       | |  (_)                   | |       | | | |       (_)| |                          \n" +
 "| |      ___    ___  __ _ | |_  _   ___   _ __     __| |  ___  | | | |  ___   _ | |_  _   _  _ __  ___  ___  \n" +
@@ -239,27 +251,55 @@ RetourMenuPrincipal();
 //Gestion des Location
 
 public static void NouvLoc(){
-System.out.println("Nouvelle location - Ajout d’une location\n\n ");
-       Client C = AjoutClient();
+    System.out.println("Nouvelle location - Ajout d’une location\n\n ");
+    Client C = AjoutClient();
+    System.out.println("Veuillez taper le numero de matriculation que vous voulez louer");
+    int matr = reader.nextInt();
+     Vehicule V = Vehicules.SearchCar(matr);
+    
+    if((V!=null)&&(C!=null)){
+        Location Loc = new Location (V,C); 
+        System.out.println("Location Crée");
+        boolean A =reg.AjouterLocation(Loc);
+        if (A==true){
+            System.out.println("Location Ajouté");
+        }else System.out.println("imposible d'ajouter cette location");
+    }
        
-}
+MenuDemarrage();}
 
 public static void FinLoc(){
-System.out.println("Fin de location - Suppression\n\n ");}
+    System.out.println("Fin de location - Suppression\n\n ");
+    System.out.println("Veuillez taper le numero cin de la personne que vous allez supprimer");
+    int cin = re1.nextInt();
+    System.out.println("Veuillez taper le numero de matriculation la voiture que vous allez supprimer");
+    int matr = re2.nextInt();
+    
+    reg.DeleteLocation(cin, matr);
+    RetourMenuPrincipal();
 
-public static void ConsVehicLoueAll(){
-System.out.println("Consultation des véhicules actuellement loués\n\n ");}
-
-public static void ConsVehicLoueClient(){
-System.out.println("Consultation des véhicules loués par un client\n\n ");
-
-System.out.println("Veuillez taper le cin du client que vous voulez verifier les locations");
- int cin = reader.nextInt();
-reg.SearchLocationCars(cin);
 }
 
+public static void ConsVehicLoueAll(){
+    System.out.println("Consultation des véhicules actuellement loués\n\n ");
+    reg.SearchLocationAll();
+
+    RetourMenuPrincipal();
+}
+
+public static void ConsVehicLoueClient(){
+   
+    System.out.println("Consultation des véhicules loués par un client\n\n ");
+    System.out.println("Veuillez taper le cin du client que vous voulez verifier les locations");
+    int cin = reader.nextInt();
+    reg.SearchLocationCars(cin);
+
+    RetourMenuPrincipal();
+}
+
+
 public static Client AjoutClient(){
-    System.out.println("Veuillez entrer un CIN pour votre client");
+   try{ System.out.println("Veuillez entrer un CIN pour votre client");
     int cin = reader.nextInt();
     System.out.println("Veuillez entrer un nom pour votre client");
     String nom = re1.nextLine();
@@ -268,13 +308,14 @@ public static Client AjoutClient(){
     System.out.println("Veuillez entrer une adresse pour votre client");
     String adresse = re3.nextLine();
  Client C1 = new Client (cin,nom,prenom,adresse);
- return C1;
+ return C1;}catch(java.util.InputMismatchException e){ //exception quand le type fournit n'est pas le meme que celui qui demandé
+     System.out.println("Veuillez entrer un type correspondant");
+     return null;
+ }
 }
 
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
         
         // Creation des voitures
@@ -319,11 +360,11 @@ public static Client AjoutClient(){
        reg.AjouterLocation(Loc3);
 
         reg.SearchLocationCars(1);
-        reg.SearchLocationAll();
+        
         
         //reg.DeleteLocation(1, 1);
         
-        
+        Loc1.Afficher();
         reg.SearchLocationAll();
        
      MenuDemarrage();
