@@ -128,6 +128,7 @@ public static void MenuGestLoc(){
             + "2 : Fin de location\n"
             + "3 : Consultation des véhicules actuellement loués\n"
             + "4 : Consultation des véhicules loués par un client\n"
+//            + "5 : Ajout de Client "
             + "0 : retour vers le menu demarrage\n");
 
     int n = reader.nextInt(); 
@@ -148,7 +149,10 @@ public static void MenuGestLoc(){
                 break;
             case 4:
                 ConsVehicLoueClient();
-                break;    
+                break; 
+//            case 5:
+//                AjoutClient();
+//                break; 
             default:
                 MenuGestLoc();
                 break;
@@ -236,7 +240,8 @@ RetourMenuPrincipal();
 
 public static void NouvLoc(){
 System.out.println("Nouvelle location - Ajout d’une location\n\n ");
-
+       Client C = AjoutClient();
+       
 }
 
 public static void FinLoc(){
@@ -246,9 +251,25 @@ public static void ConsVehicLoueAll(){
 System.out.println("Consultation des véhicules actuellement loués\n\n ");}
 
 public static void ConsVehicLoueClient(){
-System.out.println("Consultation des véhicules loués par un client\n\n ");}
+System.out.println("Consultation des véhicules loués par un client\n\n ");
 
+System.out.println("Veuillez taper le cin du client que vous voulez verifier les locations");
+ int cin = reader.nextInt();
+reg.SearchLocationCars(cin);
+}
 
+public static Client AjoutClient(){
+    System.out.println("Veuillez entrer un CIN pour votre client");
+    int cin = reader.nextInt();
+    System.out.println("Veuillez entrer un nom pour votre client");
+    String nom = re1.nextLine();
+    System.out.println("Veuillez entrer un prenom pour votre client");
+    String prenom = re2.nextLine();
+    System.out.println("Veuillez entrer une adresse pour votre client");
+    String adresse = re3.nextLine();
+ Client C1 = new Client (cin,nom,prenom,adresse);
+ return C1;
+}
 
 
     /**
@@ -268,7 +289,9 @@ System.out.println("Consultation des véhicules loués par un client\n\n ");}
         Vehicule G = new Vehicule(6,"Peugeot",0);
         Vehicule H = new Vehicule(7,"Tesla",0);
         
-        //Parc Vehicules = new Parc();
+        //Parc Vehicules = new Parc();  
+        
+        //je l'ai cree en haut comme étant static
         
         Vehicules.AjouterV(A);
         Vehicules.AjouterV(B);
@@ -289,15 +312,16 @@ System.out.println("Consultation des véhicules loués par un client\n\n ");}
               
        Location Loc1 = new Location (A,C1); 
        Location Loc2 = new Location (H,C2);
-       
+       Location Loc3 = new Location (B,C1);
        
        reg.AjouterLocation(Loc1);
        reg.AjouterLocation(Loc2);
+       reg.AjouterLocation(Loc3);
 
         reg.SearchLocationCars(1);
         reg.SearchLocationAll();
         
-        reg.DeleteLocation(1, 1);
+        //reg.DeleteLocation(1, 1);
         
         
         reg.SearchLocationAll();
