@@ -41,9 +41,23 @@ public class EnsembleLocations {
 //        loc.getV().setEtat(0);
     }
     
-    public void SearchLocation (int cin){
+    public void SearchLocationCars (int cin){
     
-        
+        for(Location loc :Ens){
+            if(loc.getC().getCIN()==cin){
+               System.out.println("Le client "+loc.getC().getNom()+" avec la CIN N="+loc.getC().getCIN()+" a loué "+loc.getV().toString());
+                
+            }              
+    
+        }
     }
     
+    public void SearchLocationAll (){
+        for(Location loc :Ens){
+            if (loc.getV().getEtat()=="loué"){
+                System.out.println("les voitures loués sont"+loc.getV().toString());
+                
+            }
+        }
+    }
 }

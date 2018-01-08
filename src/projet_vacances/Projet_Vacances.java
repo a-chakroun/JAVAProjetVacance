@@ -24,7 +24,7 @@ public class Projet_Vacances {
         Vehicule B = new Vehicule(6451,"Benz",0);
         Vehicule C = new Vehicule(5525,"Jeep",0);
         Vehicule D = new Vehicule(4567,"Chrystler",2);
-        Vehicule E = new Vehicule(7852,"Fiat",1);
+        Vehicule E = new Vehicule(7852,"Fiat",0);
         Vehicule F = new Vehicule(4582,"Aston Martin",0);
         Vehicule G = new Vehicule(3258,"Peugeot",0);
         Vehicule H = new Vehicule(7859,"Tesla",2);
@@ -37,7 +37,7 @@ public class Projet_Vacances {
         Vehicules.AjouterV(D);
         
         Vehicules.AfficherTtVoit();
-        Vehicules.ModifierV(3455,2);
+        Vehicules.ModifierV(3455,0);
         Vehicules.AfficherTtVoit();
         
 
@@ -48,9 +48,9 @@ public class Projet_Vacances {
        Location Loc1 = new Location (A,C1); 
        EnsembleLocations reg = new EnsembleLocations();
        reg.AjouterLocation(Loc1);
-       Vehicules.AfficherTtVoit();
-       //reg.DeleteLocation(Loc1);
-       Vehicules.AfficherTtVoit();
+
+        reg.SearchLocationCars(4545);
+        reg.SearchLocationAll();
         
         
         
