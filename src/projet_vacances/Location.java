@@ -18,7 +18,7 @@ public class Location {
     private double Prix=100; // testing with price and Avence
     private double MontAv=50;
 
-    public Location(Vehicule V,Client C){
+    public Location(Vehicule V,Client C){ 
         this.C=C;
         this.V=V;
     }
