@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package projet_vacances;
 
 import java.util.ArrayList;
@@ -13,59 +9,27 @@ import java.util.Scanner;
  * @author ExNihilo
  */
 public class Projet_Vacances {
+   static Parc Vehicules = new Parc();
+   static EnsembleLocations reg = new EnsembleLocations();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-        // Creation des voitures
-        
-        
-       /* Vehicule A = new Vehicule(3455,"BMW",0);
-        Vehicule B = new Vehicule(6451,"Benz",0);
-        Vehicule C = new Vehicule(5525,"Jeep",0);
-        Vehicule D = new Vehicule(4567,"Chrystler",2);
-        Vehicule E = new Vehicule(7852,"Fiat",0);
-        Vehicule F = new Vehicule(4582,"Aston Martin",0);
-        Vehicule G = new Vehicule(3258,"Peugeot",0);
-        Vehicule H = new Vehicule(7859,"Tesla",0);
-        
-        Parc Vehicules = new Parc();
-        
-        Vehicules.AjouterV(A);
-        Vehicules.AjouterV(B);
-        Vehicules.AjouterV(C);
-        Vehicules.AjouterV(D);
-        
+   public static void RetourMenuPrincipal(){ //au debut j'ai ecris ces lignes de codes dans toutes les fonction,
+                                             //puis ça m'a frappé, pourquoi ne pas faire une fonction que j'appellerais chaque fois que
+                                             //j'en aurais besoin si je ne peut pas ou je ne veux pas appeler directement MenuDemarrage()
+                                             //avec l'exception InputMismatchException quand on tape quelque chose d'autre q'un integer
+    try{Scanner reader = new Scanner(System.in);
+    int n = reader.nextInt(); 
+        switch (n) {
+            case 1:
+                MenuDemarrage();
+                  break;
+            default:
+                MenuDemarrage();
+                break;}
 
-        
-
-        
-       Client C1 = new Client (4545,"Amine","Chakroun","129 rue kadissya");
-       Client C2 = new Client (1568,"Hedi","Chebbi","nowhere road");
-       System.out.println(C1.toString());
-              
-       Location Loc1 = new Location (A,C1); 
-       Location Loc2 = new Location (H,C2);
-       
-       EnsembleLocations reg = new EnsembleLocations();
-       reg.AjouterLocation(Loc1);
-       reg.AjouterLocation(Loc2);
-
-        reg.SearchLocationCars(1568);
-        reg.SearchLocationAll();
-        
-        reg.DeleteLocation(1568, 7859);
-        
-        
-        reg.SearchLocationAll();*/
-       
-     MenuDemarrage();
-        
-    }
-
-
+}catch(java.util.InputMismatchException e){
+System.out.println("S'il vout plais veuillez taper un chiffre.");
+MenuDemarrage();}}
+   
 public static void MenuDemarrage(){     
        System.out.println(" _                         _    _                     _         _   _         _  _                           \n" +
 "| |                       | |  (_)                   | |       | | | |       (_)| |                          \n" +
@@ -86,10 +50,17 @@ public static void MenuDemarrage(){
         + "2 : Pour la Gestion des locations ");
 
     int n = reader.nextInt(); // Prendre le choix
-    
-    if(n==1){MenuGestParc();}
-    else if (n==2){MenuGestLoc();}
-    else {MenuDemarrage();}
+        switch (n) {
+            case 1:
+                MenuGestParc();
+                break;
+            case 2:
+                MenuGestLoc();
+                break;
+            default:
+                MenuDemarrage();
+                break;
+        }
 }
 
 public static void MenuGestParc(){
@@ -109,9 +80,31 @@ public static void MenuGestParc(){
             + "1 : Nouvelle acquisition\n"
             + "2 : Modification de l’état d’un véhicule\n"
             + "3 : Suppression d’un véhicule\n"
-            + "4 : Consultation parc");
+            + "4 : Consultation parc\n"
+            + "0 : retour vers le menu demarrage\n");
 
-    int n = reader.nextInt(); // Prendre le choix
+    int n = reader.nextInt(); // faire le choix
+
+        switch (n) {
+            case 0:
+                MenuDemarrage();
+                break;
+            case 1:
+                NouvAcqui();
+                break;
+            case 2:
+                ModifEtatVehic();
+                break;
+            case 3:
+                SuppVehic();
+                break;
+            case 4:
+                ConsParc();
+                break;    
+            default:
+                MenuGestParc();
+                break;
+        }
 }
 
 public static void MenuGestLoc(){
@@ -130,29 +123,182 @@ Scanner reader = new Scanner(System.in);  // pour prendre le input
             + "1 : Nouvelle location\n"
             + "2 : Fin de location\n"
             + "3 : Consultation des véhicules actuellement loués\n"
-            + "4 : Consultation des véhicules loués par un client");
+            + "4 : Consultation des véhicules loués par un client\n"
+            + "0 : retour vers le menu demarrage\n");
 
     int n = reader.nextInt(); // Prendre le choix}
 
+     switch (n) {
+         
+            case 0:
+                MenuDemarrage();
+                break;
+            case 1:
+                NouvLoc();
+                break;
+            case 2:
+                FinLoc();
+                break;
+            case 3:
+                ConsVehicLoueAll();
+                break;
+            case 4:
+                ConsVehicLoueClient();
+                break;    
+            default:
+                MenuGestLoc();
+                break;
+        }
 
 }  
 
+//Gestion du par de l'agence
+
 public static void NouvAcqui(){
-    System.out.println("Veuillez saisir la matricule de votre voiture"
-            + "suivie de sa marque et de son etat (Pour l'etat tapez"
-            + "0 pour qu'elle soit disponible, 1 pour qu'elle soit loué"
-            + "et 2 pour qu'elle soit en cours de réparation");
+    System.out.println("Nouvelle Acquisition - Ajout d’un véhicule");
     
-    Scanner reader = new Scanner(System.in);
+    Scanner re1 = new Scanner(System.in);
+    Scanner re2 = new Scanner(System.in);
+    Scanner re3 = new Scanner(System.in);
     
-    int matr=0;
-    String Marq=null;
-    int eta=0;
+    System.out.println("Veuillez saisir la matricule de votre voiture");
+    int matr= re1.nextInt();
+    System.out.println("Veuillez saisir la marque de votre voiture");
+    String Marq= re2.nextLine();
+    System.out.println("Veuillez saisir l'etat de votre voiture(Pour l'etat tapez"
+            + " 0 pour qu'elle soit disponible\n, 1 pour qu'elle soit loué"
+            + "et 2 pour qu'elle soit en cours de réparation)");
+    try{
+    int eta= re3.nextInt();
+    
     Vehicule A = new Vehicule(matr,Marq,eta);
+ 
+    Vehicules.AjouterV(A);
     
-    
+    }catch(ArrayIndexOutOfBoundsException e){
+        System.out.println("Veuilez saisir un etat normal");
+        
+    } 
+ MenuDemarrage();
+            
 }
 
+public static void ModifEtatVehic(){
+    System.out.println("Modification de l’état d’un véhicule\n\n"
+        + "Veuillez entrer un Numéro d’immatriculation ");
+    Scanner re1 = new Scanner(System.in);
+    Scanner re2 = new Scanner(System.in);
+    int matr = re1.nextInt();
+    System.out.println("Veuillez entrer:\n0 : pour disponible\n"
+            + "1 : pour loué\n"
+            + "2 : pour en cours de réparation");
+    int et = re2.nextInt();
+    Vehicules.ModifierV(matr, et);
+    
+MenuDemarrage();
+}
+
+public static void SuppVehic(){
+    System.out.println("Suppression d’un véhicule\n\n");
+    System.out.println("Veuillez entrer le Numéro d’immatriculation "
+            + "de la voiture que vous voulez supprimer !");
+        Scanner re1 = new Scanner(System.in);
+        int matr = re1.nextInt();
+        Vehicules.SuppressionMat(matr);
+        MenuDemarrage();
+}
+
+public static void ConsParc(){
+System.out.println("Consultation parc (tous les véhicules)\n\n ");
+
+Vehicules.AfficherTtVoit();
+
+System.out.println("Appuyer sur n'importe quel chiffre our revenir");
+//try{
+//Scanner reader = new Scanner(System.in);
+//    int n = reader.nextInt(); 
+//        switch (n) {
+//            case 1:
+//                MenuDemarrage();
+//                  break;
+//            default:
+//                MenuDemarrage();
+//                break;}
+//
+//}catch(java.util.InputMismatchException e){
+//System.out.println("S'il vout plais veuillez taper un chiffre.");
+//MenuDemarrage();}
+RetourMenuPrincipal();
+}
+
+//Gestion des Location
+
+public static void NouvLoc(){
+System.out.println("Nouvelle location (Ajout d’une location) ");}
+
+public static void FinLoc(){
+System.out.println("Fin de location (Suppression) ");}
+
+public static void ConsVehicLoueAll(){
+System.out.println("Consultation des véhicules actuellement loués ");}
+
+public static void ConsVehicLoueClient(){
+System.out.println("Consultation des véhicules loués par un client ");}
+
+
+
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        
+        // Creation des voitures
+        
+        
+        Vehicule A = new Vehicule(0,"BMW",0);
+        Vehicule B = new Vehicule(1,"Benz",0);
+        Vehicule C = new Vehicule(2,"Jeep",0);
+        Vehicule D = new Vehicule(3,"Chrystler",2);
+        Vehicule E = new Vehicule(4,"Fiat",0);
+        Vehicule F = new Vehicule(5,"Aston Martin",0);
+        Vehicule G = new Vehicule(6,"Peugeot",0);
+        Vehicule H = new Vehicule(7,"Tesla",0);
+        
+        //Parc Vehicules = new Parc();
+        
+        Vehicules.AjouterV(A);
+        Vehicules.AjouterV(B);
+        Vehicules.AjouterV(C);
+        Vehicules.AjouterV(D);
+        
+
+        
+        Vehicules.AfficherTtVoit();
+        
+       Client C1 = new Client (1,"Amine","Chakroun","129 rue kadissya");
+       Client C2 = new Client (2,"Hedi","Chebbi","902 nowhere road");
+       //System.out.println(C1.toString());
+              
+       Location Loc1 = new Location (A,C1); 
+       Location Loc2 = new Location (H,C2);
+       
+       
+       reg.AjouterLocation(Loc1);
+       reg.AjouterLocation(Loc2);
+
+        reg.SearchLocationCars(1);
+        reg.SearchLocationAll();
+        
+        reg.DeleteLocation(1, 1);
+        
+        
+        reg.SearchLocationAll();
+       
+     MenuDemarrage();
+//     NouvAcqui(); //juste pour tester
+        
+    }
 
 
 
