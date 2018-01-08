@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projet_vacances;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  *
@@ -36,9 +32,10 @@ public class EnsembleLocations {
     
     public void DeleteLocation (int cin,int matr ){
         
-//        boolean isremoved = Ens.remove(loc);
-//        System.out.println("La location est supprimé "+isremoved);
-//        loc.getV().setEtat(0);
+        for(Location loc :Ens) {
+            if((loc.getC().getCIN() == cin)&&(loc.getV().getMatricule() == matr))
+                Ens.remove(loc);
+            }
     }
     
     public void SearchLocationCars (int cin){
@@ -47,15 +44,15 @@ public class EnsembleLocations {
             if(loc.getC().getCIN()==cin){
                System.out.println("Le client "+loc.getC().getNom()+" avec la CIN N="+loc.getC().getCIN()+" a loué "+loc.getV().toString());
                 
-            }              
-    
+            }
         }
     }
     
     public void SearchLocationAll (){
+        System.out.println("les voitures loués sont");
         for(Location loc :Ens){
             if (loc.getV().getEtat()=="loué"){
-                System.out.println("les voitures loués sont"+loc.getV().toString());
+                System.out.print(loc.getV().toString());
                 
             }
         }
