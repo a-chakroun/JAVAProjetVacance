@@ -2,12 +2,13 @@
 package projet_vacances;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Scanner;
 
 /**
  *
- * @author AhmedAmineChakroun
+ * @author AhmedAmine
  */
 public class Projet_Vacances {
    static Parc Vehicules = new Parc();
@@ -16,14 +17,24 @@ public class Projet_Vacances {
    static Scanner re2 = new Scanner(System.in);
    static Scanner re3 = new Scanner(System.in);
    static Scanner re4 = new Scanner(System.in);
+   static Scanner re5 = new Scanner(System.in);
    static Scanner reader = new Scanner(System.in); 
 
-   public static void RetourMenuPrincipal(){ //au debut j'ai ecris ces lignes de codes dans toutes les fonction,
+public static void RetourMenuPrincipal(){ //au debut j'ai ecris ces lignes de codes dans toutes les fonction,
                                              //puis ça m'a frappé, pourquoi ne pas faire une fonction que j'appellerais chaque fois que
                                              //j'en aurais besoin si je ne peut pas ou je ne veux pas appeler directement MenuDemarrage()
                                              //avec l'exception InputMismatchException quand on tape quelque chose d'autre q'un integer
     try{//Scanner reader = new Scanner(System.in);
-    System.out.println("\n\nTaper n'importe quel bouton puis entrer");
+    System.out.println("\n");
+    System.out.println("＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿\n" +
+                        "| Verifier la haut 　　　　　　　　　　　　　　　　    [－] [口] [×]  |\n" +
+                        "| ￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣|\n" +
+                        "|　 Verifier le resultat en haut puis tapez n'importe             | \n" +
+                        "|  quel bouton pour continuer. Est ce que vous Comprennez?        | \n" +
+                        "|　 　　＿＿＿＿＿＿　　　　＿＿＿＿＿＿　　　　＿＿＿＿＿                |\n" +
+                        "| 　 　｜　Oui　　 |　　　｜　OK   　｜ 　   |Bien Sur|               |\n" +
+                        "|　 　　￣￣￣￣￣￣　　　　￣￣￣￣￣￣　　　　￣￣￣￣￣                |\n" +
+                        "|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿|");
         int n = reader.nextInt(); 
         switch (n) {
             case 1:
@@ -39,6 +50,7 @@ MenuDemarrage();}}
    
    
 public static void MenuDemarrage(){  
+
     
     
     System.out.println(
@@ -256,25 +268,49 @@ public static void NouvLoc(){
     Client C = AjoutClient();
     System.out.println("Veuillez taper le numero de matriculation que vous voulez louer");
     int matr = reader.nextInt();
-     Vehicule V = Vehicules.SearchCar(matr);
-     System.out.println("Veuillez saisir le mois de debut suivis "
-             + "du jour debut, suivis du mois fin, suivis du jour fin");
-    int MD = re1.nextInt();
-    int JD = re2.nextInt();
-    int MF = re3.nextInt();
-    int JF = re4.nextInt();
+     Vehicule V = Vehicules.SearchCarV(matr);
     
-    if((V!=null)&&(C!=null)){
+    //if((V!=null)&&(C!=null)){
         Location Loc = new Location (V,C); 
-        Loc.setDateDeb(MD, JD);
-        Loc.setDateFin(MF, JF);
-        System.out.println("Location Crée");
-        boolean A =reg.AjouterLocation(Loc);
+        
+        System.out.println("Veuillez saisir le prix");
+        double pr = reader.nextDouble();
+        Loc.setPrix(pr);
+        
+        System.out.println("Veuillez saisir le montant l'avance");
+        double av = re1.nextDouble();
+        Loc.setMontAv(av);
+        
+        System.out.println("Veuillez saisir le jour du debut");
+        int JD = re2.nextInt();
+        System.out.println("Veuillez saisir le Mois du debut");
+        int MD = re3.nextInt();
+        
+        System.out.println("Veuillez saisir le jour Fin");
+        int JF = re4.nextInt();
+        System.out.println("Veuillez saisir le Mois Fin");
+        int MF = re5.nextInt();
+        
+        Loc.setJourDeb(JD);
+        Loc.setMoisDeb(MD);
+        Loc.setJourFin(JF);
+        Loc.setMoisFin(MF);
         Loc.Afficher();
-        if (A==true){
-            System.out.println("Location Ajouté");
-        }else System.out.println("imposible d'ajouter cette location");
-    }
+        //System.out.println("Location Crée");
+        reg.AjouterLocation(Loc);
+//        if (A==true){
+//            System.out.println("Location Ajouté");
+//        }else System.out.println("imposible d'ajouter cette location");
+        
+        
+        
+        
+        
+        
+         
+         
+        
+   // }
        
 MenuDemarrage();}
 
@@ -373,11 +409,14 @@ public static Client AjoutClient(){
         
         
         //reg.DeleteLocation(1, 1);
+        int JD=1,MD=2,JF=5,MF=9;
+        Loc1.setJourDeb(JD);
+        Loc1.setMoisDeb(MD);
+        Loc1.setJourFin(JF);
+        Loc1.setMoisFin(MF);
         
-        Loc1.setDateDeb(4, 5);
-        Loc1.setDateFin(5, 5);
         Loc1.Afficher();
-        reg.SearchLocationAll();
+        //reg.SearchLocationAll();
        
      MenuDemarrage();
 //     NouvAcqui(); //juste pour tester

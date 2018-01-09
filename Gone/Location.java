@@ -2,12 +2,11 @@
 package projet_vacances;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
  *
- * @author AhmedAmineChakroun
+ * @author AhmedAmine
  */
 public class Location {
     private Vehicule V;
@@ -15,18 +14,16 @@ public class Location {
     
     private int MoisDeb; //le mois du debutde location
     private int JourDeb; //le jour du debutde location
-    
+
     private int MoisFin; //le mois de fin de location //0 pour janvier 1 pour fevrier etc
     private int JourFin; //le jour de fin de location
     
-    Calendar dateFin;
-    Calendar dateDeb ;
+    private Calendar dateDeb = new GregorianCalendar(2018,MoisDeb,JourDeb); //on utilise le GregorianCalendar pour le jour avec les jour et mois qu'on a declaré auparavant
+    private Calendar dateFin = new GregorianCalendar(2018,MoisFin,JourFin);
     
-    
- 
     private double Prix=100; // testing with price and Avance
     private double MontAv=50;
-
+    
     public Location(Vehicule V,Client C){ 
         this.C=C;
        
@@ -52,27 +49,25 @@ public class Location {
     public int getMoisDeb() {
         return MoisDeb;
     }
-    public int getJourDeb() {
-        return JourDeb;
-    }
-    
+
     public void setMoisDeb(int MoisDeb) {
         this.MoisDeb = MoisDeb;
     }
+
+    public int getJourDeb() {
+        return JourDeb;
+    }
+
     public void setJourDeb(int JourDeb) {
         this.JourDeb = JourDeb;
     }
-
-    public int getMoisFin() {
-        return MoisFin;
-    }
-
-    public int getJourFin() {
-        return JourFin;
-    }
-
+    
     public void setJourFin(int JourFin) {
         this.JourFin = JourFin;
+    }
+    
+    public int getMoisFin() {
+        return MoisFin;
     }
 
     public void setMoisFin(int MoisFin) {
@@ -93,8 +88,8 @@ public class Location {
 }
 
     public void setDateDeb(int MoisDeb,int JourDeb) { //cette methode est plutot unitile apres avoir declaré le gregorian calndar
-    dateDeb = new GregorianCalendar(2018,MoisDeb,JourDeb); //on utilise le GregorianCalendar pour le jour avec les jour et mois qu'on a declaré auparavant
-    
+    //this.dateDeb = dateDeb;
+    Calendar dateDeb = new GregorianCalendar(2018,MoisDeb,JourDeb);
 
     }
 
@@ -103,8 +98,8 @@ public class Location {
         return str;
     }
 
-    public void setDateFin(int MoisFin ,int JourFin) {
-        dateFin = new GregorianCalendar(2018,MoisFin,JourFin);
+    public void setDateFin(GregorianCalendar dateFin) {
+        this.dateFin = dateFin;
     }
 
     public double getMontAv() {
@@ -117,11 +112,14 @@ public class Location {
     
     
     public void Afficher(){
+    
     System.out.println("Le client "+C.getNom()+" "+C.getPrenom()+
             " a loué la voiture "+V.getMarque()+" avec le matricule "+
             V.getMatricule()+" du "+this.getDateDeb()+
             " jusqu'a "+this.getDateFin()+" et payé en avance "+
             this.MontAv+" pour un prix final de "+this.Prix);
+    
+    
     }
     
     
